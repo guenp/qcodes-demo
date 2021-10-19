@@ -7,6 +7,7 @@ namespace Microsoft.Quantum.Samples.Chemistry.SimpleVQE {
 
     @EntryPoint()
     operation GetEnergyHydrogenVQE(theta1: Double, theta2: Double, theta3: Double, nSamples: Int) : Double {
+        // Create a Hamiltonian to encode a Hydrogen molecule.
         let hamiltonian = JWOptimizedHTerms(
         [
             HTerm([0], [0.17120128499999998]),
@@ -26,6 +27,7 @@ namespace Microsoft.Quantum.Samples.Chemistry.SimpleVQE {
             HTerm([0, 1, 2, 3], [0.0, -0.0453218795, 0.0, 0.0453218795])
         ]
         );
+        
         let inputState = (
             3,
             [
@@ -35,6 +37,7 @@ namespace Microsoft.Quantum.Samples.Chemistry.SimpleVQE {
                 JordanWignerInputState((1.0, 0.0), [0, 1])
             ]
         );
+        
         let JWEncodedData = JordanWignerEncodingData(
             4,
             hamiltonian,
@@ -42,13 +45,11 @@ namespace Microsoft.Quantum.Samples.Chemistry.SimpleVQE {
             -0.09883444600000002
         );
 
-        // return EstimateEnergy(
-        //     5, hamiltonian, inputState, -0.09883444600000002, nSamples
-        // );
         let JWEncodedDataParam = JordanWignerEncodingData(
             5, hamiltonian, inputState, -0.09883444600000002
         );
-        return EstimateEnergy(
+
+return EstimateEnergy(
             JWEncodedDataParam, nSamples
         );
     }
