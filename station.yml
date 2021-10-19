@@ -1,0 +1,5 @@
+instruments:
+    dac:
+        type: qcodes.tests.instrument_mocks.DummyInstrument
+    dmm:
+        type: qcodes.tests.instrument_mocks.DummyInstrumentWithMeasurement
